@@ -1,0 +1,189 @@
+<br>
+
+<ul class="lista">
+ 
+    <li class="logout">
+        
+      <img src='../assets/images/logout (1).png' width="20" height="20" (click)='logOut()'> 
+    </li>
+  </ul>
+    
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<span align='center'>
+    <button (click)='sortByDueDate()'>Sortiraj</button>
+    <br>
+    <br>
+    <button (click)='proizvodiPreduzeca()'>Proizvodi</button>
+</span>
+<br>
+<br>
+
+Kuriri: {{kuriri}}
+
+<br>
+
+
+
+
+<div class="pozadina">
+    <div class="bela">
+        <div class="col-md-12" align='center'>
+
+            <br>
+            <h2>Pojedinačne narudžbine</h2>
+
+            <br>
+
+            Kuriri: {{kuriri}}
+            <div style="overflow-x:auto;">
+                <table class="tabela">
+                    <thead>
+                        <tr>
+
+                            <td>
+                                Naziv proizvoda
+                            </td>
+                            <td>
+                                Datum naručivanja
+                            </td>
+                            <td>
+                                Mesto rasadnika
+                            </td>
+                            <td>
+                                Poljoprivrednik
+                            </td>
+                            <td>
+                                Status narudžbine
+                            </td>
+                            <td>Količina</td>
+                       
+                            <td>Cela narudžbina (prikaži na dnu)</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let nar of narudzbine'>
+                            <td>
+                                {{nar.nazivProizvoda}}
+                            </td>
+                            <td>
+                                {{nar.datumNarucivanja}}
+                            </td>
+                            <td>
+                                {{nar.mestoRasadnika}}
+                            </td>
+                            <td>
+                                {{nar.poljoprivrednik}}
+                            </td>
+                            <td>
+                                <div class="crvena" *ngIf='nar.status=="na čekanju"'>
+                                    {{nar.status}}
+                                </div>
+                                <div *ngIf='nar.status!="na čekanju"'>
+                                    {{nar.status}}
+                                </div>
+
+                            </td>
+                            <td>
+                                {{nar.kolicina}}
+                            </td>
+               
+                            <td>
+                                <button (click)='prikaziCelu(nar.identifikatorPorudzbine,nar.poljoprivrednik)'
+                                    class="mali">Prikaži</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf='narudzbineSaIstimIdentifikatorom.length>0'>
+                <div class=" col-md-5">
+                    <br>
+                    <h5>Cela narudžbina</h5>
+                    <ol>
+                        <li *ngFor='let cela of narudzbineSaIstimIdentifikatorom'>
+                            {{cela.nazivProizvoda}} | {{cela.poljoprivrednik}} | {{cela.mestoRasadnika}} |
+                            {{cela.datumNarucivanja}} |
+                            {{cela.kolicina}}
+                        </li>
+                    </ol>
+                    <span *ngIf='narudzbineSaIstimIdentifikatorom[0].status=="nije isporučena" ||
+                    narudzbineSaIstimIdentifikatorom[0].status=="na čekanju"'>
+                        <button (click)='odobri(narudzbineSaIstimIdentifikatorom)' class="potvrdi">Odobri</button>
+                    </span>
+                        &nbsp;
+                        <span *ngIf='narudzbineSaIstimIdentifikatorom[0].status=="nije isporučena"'> 
+                        <button (click)='otkaziNarudzbinu(narudzbineSaIstimIdentifikatorom)'
+                            class='potvrdi'>Otkaži</button></span>
+                 
+                </div> 
+            </div>
+
+            <div align='center'>
+                <br>
+                <button (click)='prikazi()' class='prikaz'>Statistički prikaz narudžbina</button>
+                <br>
+                <br> 
+                <div class="col-md-8">
+                <canvas id="lineChart"></canvas></div> 
+                <br>
+                <br>
+            </div>
+
+
+            <div class="col-md-4">
+                <br>
+                
+                <form>
+                    <fieldset>
+                        <legend>Promena lozinke</legend>
+                   
+                    <table>
+                        <tr>
+                            <td>
+                                Stara lozinka:
+                            </td>
+                            <td>
+                                <input type="password" name="oldPassword" [(ngModel)]='oldPassword'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Nova lozinka:
+                            </td>
+                            <td>
+                                <input type="password" name="newFirst" [(ngModel)]='newFirst'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Nova lozinka:
+                            </td>
+                            <td>
+                                <input type="password" name="newSecond" [(ngModel)]='newSecond'>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <button (click)='promeni()' class="potvrdi">potvrdi</button>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+                </form>
+                {{messageZaPromenuLozinke}}
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

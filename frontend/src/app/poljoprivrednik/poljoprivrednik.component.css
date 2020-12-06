@@ -1,0 +1,19 @@
+.obavestenje {
+    background-color: #ffcc00;
+    color: black;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    height: auto;
+    border-radius: 5px;
+    padding: 5px;
+    border:black solid 2px;
+}
+
+a {
+font-size: 28px;
+}
+ a:hover {
+    background-color: #333333;
+    font-size: 30px;
+  }

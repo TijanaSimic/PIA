@@ -1,0 +1,26 @@
+.zahtevDugme {
+    font-size: 12px;
+    color: #fff;
+    background:darkred;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    size: 15 px;
+    padding: 5px;
+     
+}
+
+textarea {
+    width: 120px;
+    height: 40px;
+}
+
+.komentar {
+    font-style: italic;
+    font-size: 18px;
+    color: khaki;
+}
+
+.ocene {
+    font-style: italic;
+    font-size: 18px;
+    color: khaki;
+}

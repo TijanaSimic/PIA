@@ -1,0 +1,166 @@
+ 
+<br><ul class="lista">
+ 
+    <li class="logout">
+        
+      <img src='../assets/images/logout (1).png' width="20" height="20" (click)='logOut()'> 
+    </li>
+  </ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<button (click)='onlineProd()' class="potvrdi">Online prodavnica</button>
+<br>
+<br>
+
+
+
+<div class="pozadina">
+    <div class="bela">
+        <div class="col-md-12" align='center'>
+<br>
+<h2>Rasadnici</h2>
+<br>
+            <table class="tabela">
+                <thead>
+                    <td>Naziv</td>
+                    <td>Mesto</td>
+                    <td>Broj sadnica</td>
+                    <td>Voda</td>
+                    <td>Temperatura</td>
+                    <td>Vizuelni prikaz</td>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let rasadnik of rasadnici'>
+                        <td> {{rasadnik.naziv}} </td>
+                        <td>{{rasadnik.mesto}}</td>
+                        <td>  {{rasadnik.ukupanBrojSadnica}}</td>
+                        <td>{{rasadnik.kolicinaVode}}</td>
+                        <td>{{rasadnik.temperatura}}</td>
+                        <td>    <button (click)='prikaz(rasadnik._id)' class="mali">Raspored</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+          <br>
+          <br>
+            <div class="col-md-4">
+            <form>  
+       <fieldset> 
+             
+                            
+                        <legend>Dodavanje rasadnika</legend>
+                   <table>
+                    <tr>
+                        <td>
+                            Naziv:
+                        </td>
+                        <td>
+                            <input type="text" name="naziv" [(ngModel)]='naziv'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mesto:
+                        </td>
+                        <td>
+                            <input type="text" name="mesto" [(ngModel)]='mesto'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Dužina:
+                        </td>
+                        <td>
+                            <input type="number" name="duzina" [(ngModel)]='duzina'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Širina:
+                        </td>
+                        <td>
+                            <input type="number" name="sirina" [(ngModel)]='sirina'>
+                        </td>
+                    </tr>
+                    <Tr>
+                        <td colspan="2">
+                            <button (click)='dodaj()' class="potvrdi">Potvrdi</button>
+                        </td>
+                    </Tr>
+   
+                </table> {{messDodavanje}}
+         </fieldset>
+            </form>
+           
+
+        </div>
+
+        <br>
+        <br>
+
+   
+
+        <div class="col-md-4">
+            <br>
+            
+            <form>
+                <fieldset>
+                    <legend>Promena lozinke</legend>
+               
+                <table>
+                    <tr>
+                        <td>
+                            Stara lozinka:
+                        </td>
+                        <td>
+                            <input type="password" name="oldPassword" [(ngModel)]='oldPassword'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nova lozinka:
+                        </td>
+                        <td>
+                            <input type="password" name="newFirst" [(ngModel)]='newFirst'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Nova lozinka:
+                        </td>
+                        <td>
+                            <input type="password" name="newSecond" [(ngModel)]='newSecond'>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button (click)='promeni()' class="potvrdi">potvrdi</button>
+                        </td>
+                    </tr>
+                </table>      {{message}}
+            </fieldset>
+            </form>
+      
+
+
+
+        </div>
+
+          
+        <div class="col-md-4">
+            <div class="obavestenje" *ngIf='nizOdrzavanje.length>0'>
+                UPOZORENJE!
+            <div *ngFor='let niz of nizOdrzavanje' >
+                Rasadnik {{niz.naziv}} zahteva održavanje.
+            </div></div>
+</div>
+        </div>
+    </div>
+</div>

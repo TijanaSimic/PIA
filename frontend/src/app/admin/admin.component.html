@@ -1,0 +1,624 @@
+ 
+ 
+<div class="offset-md-2 col-md-8">
+
+   <div class="odaberi">
+      <button class="mali" (click)='zahtevati()'>Zahtevi</button>
+      <button class="mali" (click)='dodati()'>Dodavanje</button>
+      <button class="mali" (click)='obrisati()'>Brisanje</button>
+      <button class="mali" (click)='azurirati()'>Ažuriranje</button>
+      <button class="mali" (click)='promeniti()'>Promena lozinke</button>
+   </div>
+   
+   <ul class="lista">
+ 
+      <li class="logout">
+          
+        <img src='../assets/images/logout (1).png' width="20" height="20" (click)='logOut()'> 
+      </li>
+    </ul>
+      
+
+
+  
+   <div class='bela'>
+    <div class="zahtev">
+      <div *ngIf='flagZaPrikaz==0'  >
+         <br>
+         <ol>
+            <li *ngFor='let zahtev of zahtevi'>
+               <span *ngIf='zahtev.ime'>
+                  ime: {{zahtev.ime}},
+               </span>
+               <span *ngIf='zahtev.prezime'>
+                  prezime: {{zahtev.prezime}},
+               </span>
+               <span *ngIf='zahtev.username'>
+                  username: {{zahtev.username}},
+               </span>
+               <span *ngIf='zahtev.datumRodjenja'>
+                  datum rođenja: {{zahtev.datumRodjenja}},
+               </span>
+               <span *ngIf='zahtev.mestoRodjenja'>
+                  mesto rođenja: {{zahtev.mestoRodjenja}},
+               </span>
+               <span *ngIf='zahtev.nazivPreduzeca'>
+                  naziv preduzeća: {{zahtev.nazivPreduzeca}},
+               </span>
+               <span *ngIf='zahtev.datumOsnivanja'>
+                  datum osnivanja: {{zahtev.datumOsnivanja}},
+               </span>
+               <span *ngIf='zahtev.mestoPreduzeca'>
+                  mesto preduzeća: {{zahtev.mestoPreduzeca}},
+               </span>
+               <span *ngIf='zahtev.email'>
+                  email: {{zahtev.email}},
+               </span>
+               <span *ngIf='zahtev.tipKorisnika'>
+                  tip korisnika: {{zahtev.tipKorisnika}}
+               </span>
+               <button class="zahtevDugme" (click)='prihvati(zahtev.username)'>Prihvatiti</button> &nbsp;
+               <button class="zahtevDugme" (click)='odbij(zahtev.username)'>Odbiti</button>
+               <br>
+               <br>
+            </li>
+         </ol>
+      </div>
+</div>
+
+       
+         <div *ngIf='flagZaPrikaz==1'>
+
+            <div align='center'>
+               <h1>Dodavanje korisnika u sistem</h1>
+               <form>
+                  <table>
+                     <tr>
+                        <td>
+                           Želim da dodam:
+                        </td>
+                        <td>
+                           <input type="radio" name="tip" value="0" [(ngModel)]='tip'>poljoprivrednika
+                           <input type="radio" name="tip" value="1" [(ngModel)]='tip'>preduzeće
+                        </td>
+                     </tr>
+                  </table>
+               </form>
+            </div>
+
+            <div *ngIf='tip==0' align='center'>
+               <form>
+                  <table>
+                     <tr>
+                        <td>
+                           Ime:
+                        </td>
+                        <td>
+                           <input type="text" name="imePolj" [(ngModel)]='imePolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Prezime:
+                        </td>
+                        <td>
+                           <input type="text" name="prezimePolj" [(ngModel)]='prezimePolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Username:
+                        </td>
+                        <td>
+                           <input type="text" name="usernamePolj" [(ngModel)]='usernamePolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password:
+                        </td>
+                        <td>
+                           <input type="password" name="passwordPolj" [(ngModel)]='passwordPolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password(ponovo):
+                        </td>
+                        <td>
+                           <input type="password" name="potvrdaPolj" [(ngModel)]='potvrdaPolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Datum rođenja:
+                        </td>
+                        <td>
+                           <input type="text" name="datumPolj" [(ngModel)]='datumPolj' placeholder="gggg-mm-dd">
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Mesto rođenja:
+                        </td>
+                        <td>
+                           <input type="text" name="mestoPolj" [(ngModel)]='mestoPolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Telefon:
+                        </td>
+                        <td>
+                           <input type="text" name="telefonPolj" [(ngModel)]='telefonPolj'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Email:
+                        </td>
+                        <td>
+                           <input type="text" name="emailPolj" [(ngModel)]='emailPolj'>
+                        </td>
+                     </tr>
+                     <Tr>
+                        <td colspan="2">
+                           <button (click)='dodajPoljoprivrednika()' class="potvrdi">Potvrdi</button>
+                        </td>
+                     </Tr>
+                     <tr>
+                        <td colspan="2">
+                           {{message}}
+                           {{messagePolj}}
+                        </td>
+                     </tr>
+                  </table>
+               </form>
+            </div>
+
+            <div *ngIf='tip==1' align='center'>
+               <form>
+                  <table>
+                     <tr>
+                        <td>
+                           Naziv:
+                        </td>
+                        <td>
+                           <input type="text" name="nazivPred" [(ngModel)]='nazivPred'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Skraćeni naziv (username):
+                        </td>
+                        <td>
+                           <input type="text" name="usernamePred" [(ngModel)]='usernamePred'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password:
+                        </td>
+                        <td>
+                           <input type="password" name="passwordPred" [(ngModel)]='passwordPred'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password(ponovo):
+                        </td>
+                        <td>
+                           <input type="password" name="potvrdaPred" [(ngModel)]='potvrdaPred'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Datum osnivanja:
+                        </td>
+                        <td>
+                           <input type="text" name="datumPred" [(ngModel)]='datumPred' placeholder="gggg-mm-dd">
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Mesto preduzeća:
+                        </td>
+                        <td>
+                           <input type="text" name="mestoPred" [(ngModel)]='mestoPred'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Email:
+                        </td>
+                        <td>
+                           <input type="text" name="emailPred" [(ngModel)]='emailPred'>
+                        </td>
+                     </tr>
+                     <Tr>
+                        <td colspan="2">
+                           <button (click)='dodajPreduzece()' class="potvrdi">Potvrdi</button>
+                        </td>
+                     </Tr>
+                     <tr>
+                        <td colspan="2">
+                           {{message1}}
+                           {{messagePred}}
+                        </td>
+                     </tr>
+
+                  </table>
+               </form>
+        
+         </div>
+      </div>
+
+      <div *ngIf='flagZaPrikaz==2' align='center'>
+
+         <h1>Brisanje korisnika</h1>
+
+         <form>
+            <table>
+               <tr>
+                  <td>Username:</td>
+                  <td>
+                     <input type="text" name="brisanjeUsername" [(ngModel)]='brisanjeUsername'>
+                  </td>
+               <tr>
+                  <td colspan="2">
+                     <input type="radio" name="tipBrisanja" value="0" [(ngModel)]='tipBrisanja'>poljoprivrednik
+                     <input type="radio" name="tipBrisanja" value="1" [(ngModel)]='tipBrisanja'>preduzeće
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <button (click)='brisi()' class="potvrdi">Potvrdi</button>
+                  </td>
+
+               </tr>
+            </table>
+         </form>
+         {{messageZaBrisanje}}
+
+
+      </div>
+
+      <div *ngIf='flagZaPrikaz==3' align='center'>
+         <div>
+            <h1>Ažuriranje korisnika</h1>
+            <form>
+               <table>
+                  <tr>
+                     <td>
+                        Želim da ažuriram:
+                     </td>
+                     <td>
+                        <input type="radio" name="tipAzuriranja" value="0" [(ngModel)]='tipAzuriranja'>poljoprivrednika
+                        <input type="radio" name="tipAzuriranja" value="1" [(ngModel)]='tipAzuriranja'>preduzeće
+                     </td>
+                  </tr>
+               </table>
+            </form>
+         </div>
+
+
+
+         <div *ngIf='tipAzuriranja==0'>
+            <form>
+               <table>
+                  <tr>
+                     <td>
+                        Unesite korisničko ime poljoprivrednika kog želite da ažurirate:
+                     </td>
+                     <td>
+                        <input type="text" name="usernameZaAzuriranje" [(ngModel)]='usernameZaAzuriranje'>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="2" align="center">
+                        <button (click)='izaberi()' class="potvrdi">Potvrdi</button>
+                     </td>
+                  </tr>
+               </table>
+            </form>
+            <br>
+
+            <div *ngIf='flagZaTabeluAzuriranja==1' style="font-size: 12px;">
+               <div style="overflow-x:auto;"> 
+               <table class="tabelaAzuriranje">
+                  <thead>
+                     <tr>
+                        <td>Ime</td>
+                        <td>Prezime</td>
+                        <td>Username</td>
+                        <td>Password</td>
+                        <td>Datum rođenja</td>
+                        <td>Mesto rođenja</td>
+                        <td>Telefon</td>
+                        <td>Email</td>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.ime}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.prezime}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.username}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.password}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.datumRodjenja}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.mestoRodjenja}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.telefon}}
+                        </td>
+                        <td>
+                           {{poljoprivrednikZaAzuriranje.email}}
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+               
+            <br>
+            <div style="font-size: 14px;">
+               <form>
+                  <table>
+                     <tr>
+                        <td>
+                           Ime:
+                        </td>
+                        <td>
+                           <input type="text" name="imePoljA" [(ngModel)]='imePoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Prezime:
+                        </td>
+                        <td>
+                           <input type="text" name="prezimePoljA" [(ngModel)]='prezimePoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Username:
+                        </td>
+                        <td>
+                           <input type="text" name="usernamePoljA" [(ngModel)]='usernamePoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password:
+                        </td>
+                        <td>
+                           <input type="text" name="passwordPoljA" [(ngModel)]='passwordPoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Datum rođenja:
+                        </td>
+                        <td>
+                           <input type="text" name="datumPoljA" [(ngModel)]='datumPoljA' placeholder="gggg-mm-dd">
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Mesto rođenja:
+                        </td>
+                        <td>
+                           <input type="text" name="mestoPoljA" [(ngModel)]='mestoPoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Telefon:
+                        </td>
+                        <td>
+                           <input type="text" name="telefonPoljA" [(ngModel)]='telefonPoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Email:
+                        </td>
+                        <td>
+                           <input type="text" name="emailPoljA" [(ngModel)]='emailPoljA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="2">
+                           <button (click)='azurirajPolj()' class="potvrdi">Potvrdi</button>
+                        </td>
+                     </tr>
+                  </table>
+
+                  {{porukaZaAzuriranje}}
+               </form>
+            </div>
+
+            </div>
+
+            {{messageZaTabeluAzuriranja}}
+ 
+
+
+         </div>
+
+         <div *ngIf='tipAzuriranja==1'>
+            <form>
+               <table>
+                  <tr>
+                     <td>
+                        Unesite korisničko ime preduzeća koje želite da ažurirate:
+                     </td>
+                     <td>
+                        <input type="text" name="usernameZaAzuriranje" [(ngModel)]='usernameZaAzuriranje'>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="2" align="center">
+                        <button (click)='izaberi()' class="potvrdi">Potvrdi</button>
+                       
+                     </td>
+                  </tr>
+               </table>
+            </form>
+         <BR>
+            <div *ngIf='flagZaTabeluAzuriranja==1'> 
+               <div style="overflow-x:auto;"> 
+                <table class="tabelaAzuriranje">
+               <thead>
+                  <tr>
+                     <td>Naziv</td>
+                     <td>Skraceni naziv (username)</td>
+                     <td>Password</td>
+                     <td>Datum osnivanja</td>
+                     <td>Mesto preduzeća</td>
+                     <td>Email</td>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td>
+                        {{preduzeceZaAzuriranje.naziv}}
+                     </td>
+                     <td>
+                        {{preduzeceZaAzuriranje.username}}
+                     </td>
+                     <td>
+                        {{preduzeceZaAzuriranje.password}} 
+                     </td>
+                     <td>
+                        {{preduzeceZaAzuriranje.datumOsnivanja}}
+                     </td>
+                     <td>
+                        {{preduzeceZaAzuriranje.mestoPreduzeca}}
+                     </td>
+                     <td>
+                        {{preduzeceZaAzuriranje.email}}
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+            </div>
+            <br>
+            <div>
+               <form>
+                  <table>
+                     <tr>
+                        <td>
+                           Naziv:
+                        </td>
+                        <td>
+                           <input type="text" name="nazivPredA" [(ngModel)]='nazivPredA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Skraćeni naziv (username):
+                        </td>
+                        <td>
+                           <input type="text" name="usernamePredA" [(ngModel)]='usernamePredA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Password:
+                        </td>
+                        <td>
+                           <input type="text" name="passwordPredA" [(ngModel)]='passwordPredA'>
+                        </td>
+                     </tr>
+
+                     <tr>
+                        <td>
+                           Datum osnivanja:
+                        </td>
+                        <td>
+                           <input type="text" name="datumPredA" [(ngModel)]='datumPredA' placeholder="gggg-mm-dd">
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Mesto preduzeća:
+                        </td>
+                        <td>
+                           <input type="text" name="mestoPredA" [(ngModel)]='mestoPredA'>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td>
+                           Email:
+                        </td>
+                        <td>
+                           <input type="text" name="emailPredA" [(ngModel)]='emailPredA'>
+                        </td>
+                     </tr>
+                     <Tr>
+                        <td colspan="2">
+                           <button (click)='azurirajPreduzece()' class='potvrdi'>Potvrdi</button>
+                        </td>
+                     </Tr>
+                  </table>
+               </form>
+               {{porukaZaAzuriranje1}}
+            </div>
+            </div>
+            {{messageZaTabeluAzuriranja}}
+         </div>
+      </div>
+
+      <div *ngIf='flagZaPrikaz==4' align='center'>
+
+
+         <h1>Promena lozinke</h1>
+         <form>
+            <table>
+               <tr>
+                  <td>
+                     Stara lozinka:
+                  </td>
+                  <td>
+                     <input type="password" name="oldPassword" [(ngModel)]='oldPassword'>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     Nova lozinka:
+                  </td>
+                  <td>
+                     <input type="password" name="newFirst" [(ngModel)]='newFirst'>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     Nova lozinka:
+                  </td>
+                  <td>
+                     <input type="password" name="newSecond" [(ngModel)]='newSecond'>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <button (click)='promeni()' class="potvrdi">Potvrdi</button>
+                  </td>
+               </tr>
+            </table>
+         </form>
+         {{messageZaPromenuLozinke}}
+      </div>
+
+   </div>
+</div>

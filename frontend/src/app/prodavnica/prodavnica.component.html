@@ -1,0 +1,163 @@
+<body>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pozadina">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                   
+
+                    <span class="slika">
+                        <button (click)='glavna()' class="potvrdi">Početna strana</button>
+
+                    </span> <br>
+                    <br>
+                    <br>
+                </div>
+
+
+                <h1>ONLINE PRODAVNICA</h1>
+            </div>
+        </div>
+ 
+  
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div align="center">
+                    <br>
+                    <br>
+                    <br>
+                    <table class="tabela" style="width: 95%;" align="center">
+                        <thead>
+                            <tr>
+                                <td style="padding:0px 0px 0px 0px">
+                                    <img src='../../assets/images/shoponline.png' style="width: 80%;"></td>
+
+                                <td>Proizvođač</td>
+                                <td>Ocena</td>
+                                <td>Na stanju</td>
+                                <td>Cena (komad)</td>
+                                <td>Detalji</td>
+                                <td>Naruči</td>
+                                <td>Količina</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor='let pr of proizvodi,let index=index'>
+
+                                <td>{{pr.nazivProizvoda}}</td>
+                                <td>{{pr.preduzece}}</td>
+                                <td><span *ngIf='pr.prosecnaOcena'>
+
+                                        {{pr.prosecnaOcena}}
+                                    </span>
+                                    <span *ngIf='!pr.prosecnaOcena'>
+                                        nema ocena
+                                    </span>
+                                </td>
+                                <td>{{pr.kolicina}}</td>
+                                <td>{{pr.cenaPoKomadu}}</td>
+
+                                <td><button (click)='detalji(pr)' class="mali">Detalji</button></td>
+                                <td> <span *ngIf='pr.kolicina>0'>
+                                        <input type="checkbox" name="{{proizvodi[index].cekirano}}"
+                                            [(ngModel)]='proizvodi[index].cekirano'>
+                                    </span>
+                                    <span *ngIf='pr.kolicina==0' class="iks">
+                                        <img src="../../assets/images/close.png" width="5px" height="5px">
+                                    </span>
+
+                                </td>
+                                <td> <input type="number" name="{{proizvodi[index].kolicinaZaKupovinu}}"
+                                        [(ngModel)]='proizvodi[index].kolicinaZaKupovinu'></td>
+
+                            </tr>
+
+                            <tr>
+                                <td colspan="8" align="right" style="padding:0%;">
+                                    <button (click)='kupi()' class="potvrdi">dodaj u korpu</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        
+        <div class="row">
+ 
+
+            <div class="col-md-6">
+
+                <fieldset style="padding-bottom: 100px;">
+                    <legend>Korpa
+
+                    </legend>
+                    
+        <span *ngIf='flagZaFormu'> 
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            Naziv rasadnika:
+                        </td>
+                        <td>
+                            <input type="text" style="max-width: 150px;" name='nazivRasadnika' [(ngModel)]='nazivRasadnika' >
+    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mesto rasadnika:
+                        </td>
+                        <td>
+                            <input type="text" style="max-width: 150px;" name='mestoRasadnika' [(ngModel)]='mestoRasadnika' >
+    
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </span>
+   
+                    <ol>
+                        <li *ngFor='let nar of trenutneNarudzbine'>
+                            {{nar.nazivProizvoda}} |
+                            {{nar.preduzece}} |
+                            {{nar.mestoPreduzeca}} |
+                            {{nar.kolicina}}
+
+                            <button (click)='obrisi(nar)' class="zahtevDugme">Obriši</button>
+                            <br>
+                        </li>
+                    </ol>
+                    <span *ngIf='flagZaNarucivanje==1'>
+                        <button (click)='potvrdi()' class="potvrdi">Potvrdi</button></span>
+                    <br>
+                    <br>
+                    {{mess}}
+                    <br>
+                    {{message}}
+                </fieldset>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>

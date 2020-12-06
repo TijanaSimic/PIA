@@ -1,0 +1,50 @@
+ <img src="../../assets/images/close.png" width="15px" height="15px" align='right' (click)='onNoClick()'>
+
+
+<div mat-dialog-title *ngIf='sadnica'>{{sadnica.naziv}}, {{sadnica.proizvodjac}}
+
+   
+    <!--mat-progress-bar mode="determinate" value="{{napredak}}"  style="background-color: red;"></mat-progress-bar-->
+ 
+     
+      <progress id="file" value="{{napredak}}" max="100"></progress>
+    <span *ngIf='flagZaVadjenje==0'>
+        <form>       
+
+            <span *ngFor='let preparat of preparati,let index=index'>
+                <input type="radio" name="selektovanPreparat"
+                 [(ngModel)]='selektovanPreparat' value="{{index}}">
+                {{preparat.nazivProizvoda}} 
+
+                <br>
+            </span>
+            <button (click)='primeni()' class="potvrdi">Primeni</button>
+        </form>
+    </span>
+    <span *ngIf='flagZaVadjenje==1'>
+        {{message}}
+        <br>
+        <button (click)='izvadi()' class="potvrdi">Izvadi</button>
+        <br>
+  
+    </span>
+    <span *ngIf='flagZaVadjenje==2'>
+        Sadnica će biti izvađena nakon jednog dana.
+        </span>
+</div>
+<div *ngIf='!sadnica'>
+<h2 mat-dialog-title  >Zasadi</h2>
+<form>
+
+    <span *ngFor='let s of sadniceMagacin,let index=index'>
+        <input type="radio" name="selektovanaSadnica"
+         [(ngModel)]='selektovanaSadnica' value="{{index}}">
+        {{s.nazivProizvoda}}
+
+        <br>
+    </span>
+    <button (click)='zasadi()' class="potvrdi">Zasadi</button>
+</form>
+</div>
+
+ 

@@ -1,0 +1,79 @@
+.bela {
+    background-color: #333;
+    color:white;
+    height: auto;
+    max-height: 100%;
+    vertical-align: center;
+    text-align: left;
+}
+.zahtev {
+    background-color:  #333;
+    color:white;
+    height: auto;
+    max-height: 100%;
+    vertical-align: center;
+    text-align: left;
+}
+
+
+.odaberi {
+    background-color:#4CAF50;
+    text-align: center;
+}
+
+.mali {
+    font-size: 12px;
+    color: #fff;
+    background:#4CAF50;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+     
+   
+}
+
+.zahtevDugme {
+    font-size: 12px;
+    color: #fff;
+    background:darkred;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    size: 15 px;
+    padding: 5px;
+     
+}
+
+.centrirano {
+    text-align: center;
+    vertical-align: center;
+}
+
+ 
+h1 {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.tabelaAzuriranje {
+
+    color: whitesmoke;
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    
+
+
+} 
+.tabelaAzuriranje thead {
+    border-color: whitesmoke;
+    border: 1px solid;
+   background-color:darkred;
+   text-decoration: none;
+   color: white;
+}
+.tabelaAzuriranje td {
+    
+    border: 1px solid whitesmoke;
+}
+tbody {
+    color: black;
+    background-color: khaki;
+    border: 1px solid white;
+}
+/*.tabelaAzuriranje tr:nth-child(even){background-color: #fff9a8}*/ 

@@ -1,0 +1,116 @@
+<br>
+<br>
+<br><ul class="lista">
+ 
+    <li class="logout">
+        
+      <img src='../assets/images/logout (1).png' width="20" height="20" (click)='logOut()'> 
+    </li>
+  </ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<button (click)='pocetna()' class="potvrdi">Početna strana</button>
+<br>
+<br>
+
+<br>
+<div class="pozadina">
+    <div class="bela">
+        <div class="col-md-12" align='center'>
+            <br>
+            <br>
+
+            <h2>Detalji proizvoda</h2>
+
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <td>Naziv proizvoda</td>
+                        <td>Cena po komadu</td>
+                        <td>Prosečna ocena</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            {{proizvod.nazivProizvoda}}
+                        </td>
+                        <td>{{proizvod.cenaPoKomadu}}</td>
+                        <td>
+                            <span *ngIf='prosecnaOcena!=0'>
+                                {{prosecnaOcena}}
+                            </span>
+                            <span *ngIf='prosecnaOcena==0'>
+                                Nema ocena.
+                            </span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="offset-md-1 col-md-10">
+                <div *ngIf='komentari.length>0' align='left'>
+
+                    <br>
+                    <h4>Komentari</h4>
+
+                    <ol>
+                        <li *ngFor='let komentar of komentari'>
+                            {{komentar.poljoprivrednik}}:
+                            <span class="komentar">
+                                {{komentar.tekst}}
+                            </span>
+                        </li>
+                    </ol>
+                </div>
+
+
+                <div *ngIf='ocene.length>0' align='left' >
+
+                    <h4>Ocene</h4>
+                    <ol>
+                        <li *ngFor='let ocena of ocene'>
+                            {{ocena.poljoprivrednik}}:
+                            <span class='ocene'>
+                                {{ocena.vrednost}}
+                            </span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <br>
+            <div *ngIf='flagZaDodavanje==1'>
+                <h1>Unos komentara i ocene</h1>
+                <form>
+                    <table>
+                        <tr>
+                            <td> Komentar:</td>
+                            <td> <textarea name="tekst" [(ngModel)]='tekst'></textarea></td>
+                            <td><button (click)='dodajKomentar()' class="potvrdi">Potvrdi</button></td>
+                        </tr>
+                        <tr>
+                            <td> Ocena:</td>
+                            <td> <input type="number" min="1" max="10" name="zahtevDugme" [(ngModel)]='ocena'></td>
+                            <td> <button (click)='dodajOcenu()' class="potvrdi">Potvrdi</button></td>
+                        </tr>
+                    </table>
+                    {{mess}} 
+                </form>
+                <br>
+                <br>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
