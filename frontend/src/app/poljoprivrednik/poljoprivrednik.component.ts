@@ -64,18 +64,14 @@ export class PoljoprivrednikComponent implements OnInit {
               if (novi == 0) {
                 this.servis.dohvatiNarudzbineSaIstimIdentifikatoromiPolj(nar.identifikatorPorudzbine,
                   nar.poljoprivrednik).subscribe(data => {
-                    //    console.log('identif je', nar.identifikatorPorudzbine, ' a polj ej ', nar.identifikatorPorudzbine)
-                    this.narudzbineSaIstimIdentifikatorom = data
+                      this.narudzbineSaIstimIdentifikatorom = data
                     this.narudzbineSaIstimIdentifikatorom.forEach(narudzbina => {
-                      //     console.log('polj je', nar.poljoprivrednik, narudzbina.poljoprivrednik,
-                      //    'a mesto je', nar.mestoRasadnika, narudzbina.mestoRasadnika)
-                      this.servis.dohvatiRasadnikNaOsnovuPoljNaziv(narudzbina.poljoprivrednik, narudzbina.nazivRasadnika).subscribe(
+                       this.servis.dohvatiRasadnikNaOsnovuPoljNaziv(narudzbina.poljoprivrednik, narudzbina.nazivRasadnika).subscribe(
                         data => {
                           let rasadnik = data
-                          //     console.log('data', data)
                           if (data) {
                             let id = rasadnik._id
-                            //     console.log('id ej')
+                             
                             let dodati = {
                               nazivProizvoda: narudzbina.nazivProizvoda,
                               proizvodjac: narudzbina.preduzece,
@@ -85,7 +81,7 @@ export class PoljoprivrednikComponent implements OnInit {
                               uputstvo: narudzbina.uputstvo, //o ako je sadnica, sve ostalo ako je preparat
                               ukupanBrojDana: narudzbina.ukupanBrojDana
                             }
-                            //     console.log('DODATI JE',dodati)
+                          
                             this.servis.dodajNarudzbinuUMagacin(dodati).subscribe(data => {
                               let n = {
 
@@ -101,10 +97,8 @@ export class PoljoprivrednikComponent implements OnInit {
                         })
                     })
                     let kuriri = <number>JSON.parse(localStorage.getItem(`${nar.preduzece}`))
-                    //    console.log('kuriri su,', kuriri)
-                    let kuriripotvrda: string = localStorage.getItem(`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}flag`)
-                    //    console.log(kuriripotvrda)
-                    if (!kuriripotvrda)
+                     let kuriripotvrda: string = localStorage.getItem(`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}flag`)
+                     if (!kuriripotvrda)
                       localStorage.setItem(`${nar.preduzece}`, JSON.stringify(kuriri + 1));
                     localStorage.removeItem((`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}`));
                   })
@@ -120,8 +114,6 @@ export class PoljoprivrednikComponent implements OnInit {
                       this.narudzbineSaIstimIdentifikatorom.forEach(narudzbina => {
                         this.servis.dohvatiRasadnikNaOsnovuPoljNaziv(narudzbina.poljoprivrednik, narudzbina.nazivRasadnika).subscribe(
                           data => {
-                            // console.log(narudzbina.poljoprivrednik,narudzbina.mestoRasadnika)
-                            // console.log('RASADNIK JE',data)
                             if (data) {
                               let id = data._id
                               let dodati = {
@@ -133,8 +125,7 @@ export class PoljoprivrednikComponent implements OnInit {
                                 uputstvo: narudzbina.uputstvo, //o ako je sadnica, sve ostalo ako je preparat
                                 ukupanBrojDana: narudzbina.ukupanBrojDana
                               }
-                              // console.log('DODATI JE',dodati)
-                              this.servis.dodajNarudzbinuUMagacin(dodati).subscribe(data => {
+                                this.servis.dodajNarudzbinuUMagacin(dodati).subscribe(data => {
                                 //     console.log('azurirani obj je',data)
                                 let n = {
 
@@ -144,18 +135,13 @@ export class PoljoprivrednikComponent implements OnInit {
                                 this.servis.azurirajNarudzbinuStatus(n).subscribe()
                               })
                             }
-                            // ovo ispod premestam da se ne izvrsava za svaku nar
-                            //localStorage.removeItem((`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}`));
-                          })
+                            })
                       })
                       let kuriri = <number>JSON.parse(localStorage.getItem(`${nar.preduzece}`))
-                      //   console.log('kuriri su,', kuriri)
                       let kuriripotvrda: string = localStorage.getItem(`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}flag`)
-                      // console.log(kuriripotvrda)
-                      if (!kuriripotvrda)
+                       if (!kuriripotvrda)
                         localStorage.setItem(`${nar.preduzece}`, JSON.stringify(kuriri + 1));
-                      //  console.log('kuriri su,', kuriri)
-                      localStorage.removeItem((`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}`));
+                       localStorage.removeItem((`${nar.identifikatorPorudzbine},${nar.poljoprivrednik}`));
 
                     })
                 }, novi);
