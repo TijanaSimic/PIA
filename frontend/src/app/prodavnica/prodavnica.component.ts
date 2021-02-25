@@ -13,9 +13,7 @@ import { Preduzece } from '../models/preduzece';
   styleUrls: ['./prodavnica.component.css']
 })
 export class ProdavnicaComponent implements OnInit {
-
-  //STAVITI DA SE KOLICINA PROIZVODA SMANJUJE ALI SAMO OVDE A NE U BAZI
-
+  
   constructor(private servis: ServisService, private router: Router) { }
 
   korpa: Porudzbina[] = []
@@ -35,11 +33,9 @@ export class ProdavnicaComponent implements OnInit {
 
     this.servis.preduzeca().subscribe(data => this.svaPreduzeca = data)
 
-    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser'));
-    //staviti da polj kad se registruje ima svoj identifikator 0
-    //   localStorage.setItem(`${this.loggedUser}identifikator`,JSON.stringify(0))
+    this.loggedUser = JSON.parse(localStorage.getItem('loggedUser')); 
     this.noviindex = JSON.parse(localStorage.getItem(`${this.loggedUser}identifikator`))
-   // console.log(this.noviindex, 'novi index je')
+ 
 
     this.servis.pretragaPoljUsername(this.loggedUser).subscribe(data => this.ulogovaniPoljoprivrednik = data)
     this.servis.sviProizvodi().subscribe(data => this.proizvodi = data);
@@ -48,9 +44,7 @@ export class ProdavnicaComponent implements OnInit {
   detalji(p: Proizvod) {
     localStorage.setItem(`proizvod-detalji`, JSON.stringify(p));
     this.router.navigate(['/detalji']);
-  }
-
-  // sviProizvodi: ProizvodKorpa[] = []
+  } 
   flagZaProizvode: number = 0;
 
 
@@ -70,8 +64,7 @@ export class ProdavnicaComponent implements OnInit {
     }
     this.flagZaFormu = false;
 
-
-   // console.log("Mesto rasadnika u kupi je", this.mestoRasadnika, this.nazivRasadnika)
+ 
 
     this.message = ""
     this.proizvodi.forEach(pr => {
@@ -95,8 +88,7 @@ export class ProdavnicaComponent implements OnInit {
                       this.postojecaNarudzbina = el;
                   }
 
-                })
-               // console.log("POSTOJECA NAR", this.postojecaNarudzbina)
+                }) 
                 if (this.postojecaNarudzbina) {
                   this.servis.azurirajNarudzbinuKolicina(this.postojecaNarudzbina._id,
                     pr.kolicinaZaKupovinu).subscribe(data => {
@@ -127,17 +119,11 @@ export class ProdavnicaComponent implements OnInit {
                     ukupanBrojDana: pr.ukupanBrojDana,
                     vrstaProizvoda: pr.vrsta
                   }
-
-           //       console.log('IDENTIFIKATOR PORUDZBINE JE', n.identifikatorPorudzbine)
-
+ 
                   this.servis.dodajNarudzbinu(n).subscribe(nar => {
                     this.servis.azurirajNarudzbinuDatum(nar._id).subscribe(data1 => {
-                      this.trenutneNarudzbine.push(data1);
-                      // this.servis.azurirajKolicinuProizvoda(pr._id, pr.kolicinaZaKupovinu * (-1)).subscribe(
-                      //   data => {
-                      this.flagZaNarucivanje = 1
-                      //    this.servis.sviProizvodi().subscribe(data => this.proizvodi = data);
-                      //     })
+                      this.trenutneNarudzbine.push(data1); 
+                      this.flagZaNarucivanje = 1 
                     });
                   })
 
@@ -191,21 +177,14 @@ export class ProdavnicaComponent implements OnInit {
                       ukupanBrojDana: pr.ukupanBrojDana,
                       vrstaProizvoda: pr.vrsta
                     }
-
-                  //  console.log('IDENTIFIKATOR PORUDZBINE JE', n.identifikatorPorudzbine)
+ 
 
                     this.servis.dodajNarudzbinu(n).subscribe(nar => {
                       this.servis.azurirajNarudzbinuDatum(nar._id).subscribe(data1 => {
                         this.trenutneNarudzbine.push(data1);
 
-                  /*  this.servis.azurirajKolicinuProizvoda(pr._id, pr.kolicina * (-1)).subscribe(
-                      data => {
-                      */  this.flagZaNarucivanje = 1
-
-                        /*
-                          this.servis.sviProizvodi().subscribe(data => this.proizvodi = data);
-                        }
-                      )*/
+                  this.flagZaNarucivanje = 1
+ 
                       });
                     })
                   }
@@ -217,14 +196,12 @@ export class ProdavnicaComponent implements OnInit {
 
           }
         })
-      }
-      //
-  //    console.log("postojeca dno", this.postojecaNarudzbina)
+      } 
     });
 
     this.noviindex += 1;
     localStorage.setItem(`${this.loggedUser}identifikator`, JSON.stringify(this.noviindex))
-   // console.log(this.noviindex, 'je novi index na kraju')
+ 
 
   }
 
@@ -234,9 +211,7 @@ export class ProdavnicaComponent implements OnInit {
 
     this.servis.dohvatiProizvod(nar.preduzece, nar.nazivProizvoda).subscribe(
       data => {
-     //   console.log(data)
-        // this.servis.azurirajKolicinuProizvoda(data._id, nar.kolicina).subscribe(
-        //   data => {
+ 
 
         this.proizvodi.forEach(pr => {
           if (pr.nazivProizvoda == nar.nazivProizvoda) pr.kolicina += nar.kolicina
@@ -249,7 +224,7 @@ export class ProdavnicaComponent implements OnInit {
             if (this.trenutneNarudzbine.length == 0) this.flagZaFormu = true;
           }
         })
-        //  })
+      
       })
 
 
